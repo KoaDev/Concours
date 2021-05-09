@@ -1,0 +1,97 @@
+from math import *
+
+
+def derivee(signea, a, signeb, b, signec, c, interval):
+    print('Fonction f() =', signea, a, signeb, b, signec, c)
+
+    # CALCUL DELTA
+
+    if signea == '+':
+        aa = int(a.replace("x²", ""))
+    else:
+        aa = -int(a.replace("x²", ""))
+
+    if signeb == '+':
+        bb = int(b.replace("x", ""))
+    else:
+        bb = -int(b.replace("x", ""))
+
+    if signec == '+':
+        cc = c
+    else:
+        cc = -c
+
+    delta = bb * bb - 4 * (aa) * (cc)
+
+    print('Delta = ', delta)
+
+    # CALCUL DERIVE
+
+    derivera = (int(a.replace("x²", ""))) * 2
+    deriverb = (int(b.replace("x", "")))
+
+    print('Dérivé f\'() =', signea, derivera, 'x', signeb, deriverb)
+
+    print('-----------------------------')
+
+    def inverse(signe):
+        if signe == '+':
+            return '-'
+        if signe == '-':
+            return '+'
+
+    def fleche(signe):
+        if signe == '+':
+            return '↗'
+        if signe == '-':
+            return '↘'
+
+    def calcule(x):
+        return (aa) * x**2 + (bb) * x + (c)
+
+    if delta > 0:
+
+        x1 = ((-(bb)) - sqrt(delta)) / 2 * (aa)
+        x2 = ((-(bb)) + sqrt(delta)) / 2 * (aa)
+
+
+        print('x    |', interval[0], '  ', x1, ' ', x2, '  ', interval[1])
+        print('-----------------------------')
+        print('f(x) |', signea, '    Ø  ',inverse(signea),'  Ø    ', signea)
+        print('-----------------------------')
+        print('     |','    ',calcule(x1), '           ', interval[1])
+        print('f\'(x)|', fleche(signea), '    Ø  ', fleche(inverse(signea)), '  Ø    ', fleche(signea))
+        print('     |', calcule(interval[0]), '           ', calcule(x2))
+
+
+
+    elif delta == 0:
+
+        x1 = - (bb/2 * (aa))
+
+
+        print('x    |', interval[0], '  ', x1, '  ', interval[1])
+        print('-----------------------------')
+        print('f(x) |', signea, '   0      ', signea)
+        print('-----------------------------')
+        print('     |', '    ' '             ', interval[1])
+        print('f\'(x)|  ', fleche(signea), '    0     ', fleche(signea))
+        print('     |', calcule(interval[0]), '           ', )
+
+
+    else:
+
+        print('x    |', interval[0],  '                 ', interval[1])
+        print('-----------------------------')
+        print('f(x) |         ', signea)
+        print('-----------------------------')
+        print('     |', '                 ', calcule(interval[1]))
+        print('f\'(x)|         ', fleche(signea))
+        print('     |  ',calcule(interval[0]))
+
+
+
+    print('-----------------------------')
+
+
+derivee('-', '1x²', '+', '4x', '+', 4, [0, 5])
